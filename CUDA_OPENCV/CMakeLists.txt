@@ -23,7 +23,6 @@ target_link_libraries(main
     PRIVATE
         ${OpenCV_LIBS}
         Threads::Threads
-        cuda
         cudart
 )
 
