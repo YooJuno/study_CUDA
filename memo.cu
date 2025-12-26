@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <opencv4/opencv/2/opencv.hpp>
+#include <opencv4/opencv2/opencv.hpp>
 
 #define LENGTH 1024
 
@@ -35,6 +35,8 @@ int main(void)
         ptrHostB[i] = rand() % 256;
         ptrHostC[i] = rand() % 256;
     }
+
+    cv::Mat img;
     
     int* ptrDeviceA;
     int* ptrDeviceB;
@@ -50,13 +52,13 @@ int main(void)
     cudaMemcpy(ptrDeviceB, ptrHostB, arrSize, cudaMemcpyHostToDevice);
     cudaMemcpy(ptrDeviceC, ptrHostC, arrSize, cudaMemcpyHostToDevice);
 
-    kernel<<<1, 1>>>(dDataPtr);
+    kernel<<<1, LENGTH>>>(ptrDeviceA, ptrDeviceB, ptrDeviceC);
 
     cudaDeviceSynchronize();
 
-    cudaMemcpy(ptrDeviceA, ptrHostA, arrSize, cudaMemcpyDeviceToHost);
-    cudaMemcpy(ptrDeviceB, ptrHostB, arrSize, cudaMemcpyDeviceToHost);
-    cudaMemcpy(ptrDeviceC, ptrHostC, arrSize, cudaMemcpyDeviceToHost);
+    cudaMemcpy(ptrHostA, ptrDeviceA, arrSize, cudaMemcpyDeviceToHost);
+    cudaMemcpy(ptrHostB, ptrDeviceB, arrSize, cudaMemcpyDeviceToHost);
+    cudaMemcpy(ptrHostC, ptrDeviceC, arrSize, cudaMemcpyDeviceToHost);
 
     cudaFree(ptrDeviceA);
     cudaFree(ptrDeviceB);
