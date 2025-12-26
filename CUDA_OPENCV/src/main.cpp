@@ -23,9 +23,9 @@ int main()
     // Initialize timer
     DS_timer timer(5);
     timer.setTimerName(0, "Total CUDA");
-    timer.setTimerName(1, "cudaMemcpy H2D");
-    timer.setTimerName(2, "Kernel Launch");
-    timer.setTimerName(3, "cudaMemcpy D2H");
+    timer.setTimerName(1, "Host -> Deivce");
+    timer.setTimerName(2, "GPU Kernel");
+    timer.setTimerName(3, "Device -> Host");
     timer.setTimerName(4, "CPU Invert");
 
     timer.timerOn();
