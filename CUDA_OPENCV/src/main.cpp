@@ -1,7 +1,8 @@
 #include <opencv2/opencv.hpp>
 #include <cuda_runtime.h>
-#include "cuda_opencv/kernel.hpp"
+#include "CUDA_OpenCV/kernel.hpp"
 #include "DS_Timer/DS_timer.h"
+#include "CUDA/CUDA_definitions.cuh"
 
 using namespace std;
 using namespace cv;
@@ -44,7 +45,7 @@ int main()
     timer.offTimer(1);
 
     timer.onTimer(2);
-    launchKernel(ptrDeviceA, size);
+    launchKernel(ptrDeviceA, ImgHostCPU.cols, ImgHostCPU.rows);
     timer.offTimer(2);
 
     timer.onTimer(3);
