@@ -1,2 +1,10 @@
-a.out
-/build
+# CMake build directory
+build/
+
+# VSCode
+.vscode/
+
+# Object / binary
+*.o
+*.out
+main
